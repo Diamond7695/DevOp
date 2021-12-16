@@ -24,7 +24,6 @@ app.get('/styles.css', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/styles.css'))
   })
 
-  let students = []
 
   app.get('/', (req,res) => {
       res.sendFile(path.join(__dirname, '/public/index.html'))
@@ -35,6 +34,12 @@ app.get('/styles.css', (req, res) => {
 app.post('/api/student', (req,res) =>{
     let {name} = req.body
     name = name.trim()
+
+    students.push(name)
+
+    rollbar.log('student added successfully', {author: "Diamond", type:"manual"})
+
+    res.status(200).send(students)
 
     
 
