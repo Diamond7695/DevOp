@@ -17,8 +17,6 @@ app.get('/', (req,res)=>{
 })
 
 let students = []
-const app = express()
-app.use(express.json())
 
 
 
