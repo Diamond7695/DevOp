@@ -3,7 +3,7 @@ const express = require('express')
 const path = require('path')
 const app = express()
 
-app.use(express.json())
+
 
 var Rollbar = require('rollbar')
 var rollbar = new Rollbar({
@@ -16,28 +16,31 @@ app.get('/', (req,res)=>{
     rollbar.info('html file serverd successfully.')
 })
 
-let students = []
-
-
-
-app.get('/', (req,res)=>{
+app.get('/',function(req,res){
     res.sendFile(path.join(__dirname, '/public/index.html'))
-    rollbar.info('html file serverd successfully.')
 })
+
+app.get('/styles.css', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/styles.css'))
+  })
+
+  let students = []
+
+  app.get('/', (req,res) => {
+      res.sendFile(path.join(__dirname, '/public/index.html'))
+      rollbar.info('html file served successfully.')
+  })
+  
 
 app.post('/api/student', (req,res) =>{
     let {name} = req.body
     name = name.trim()
 
-    students.push(name)
+    
 
-    rollbar.log('student added successfully', {author: "Diamond", type:"manual"})
-
-    res.status(200).send(students)
+   
 })
-
-
-
+app.use(rollbar.errorHandler())
 const port = process.env.PORT || 4545
 app.listen(port, () => console.log(` It works!${port}`))
-app.use(rollbar.errorHandler())
+
