@@ -29,7 +29,7 @@ app.post('/api/student', (req,res) =>{
     let {name} = req.body
     name = name.trim()
 
-    students.push(name)
+    
 
     rollbar.log('student added successfully', {author: "Diamond", type:"manual"})
 
