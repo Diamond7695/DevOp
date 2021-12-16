@@ -19,7 +19,7 @@
     <script>
         const addForm = document.querySelector('form')
         const nameInput = document.querySelector('input')
-
+let students =[]
         function submitHandler(e){
             e.preventDefault()
             axios.post('/api/student', {name: nameInput.value, })
