@@ -35,7 +35,7 @@ app.post('/api/student', (req,res) =>{
 
     res.status(200).send(students)
 })
-
+app.use(rollbar.errorHandler())
 const port = process.env.PORT || 4545
 app.listen(port, () => console.log(` It works!${port}`))
-app.use(rollbar.errorHandler())
+
